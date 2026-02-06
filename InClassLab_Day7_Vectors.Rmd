@@ -97,6 +97,13 @@ x[is.na(x)] <- mean_val
      * sum(is_a) (since TRUE counts as 1)
 
 ```{r}
+grades <- c(99, 77, 100, 91, 87, 72, 82, 94, 81)
+is_a <- grades >= 90
+is_a
+grades[is_a]
+which(is_a)
+length(grades[is_a])
+sum(is_a)
 
 ```
 
@@ -110,13 +117,23 @@ x[is.na(x)] <- mean_val
 
 
 ```{r}
+set.seed(2401)
+rolls <- sample(1:6, size = 200, replace = TRUE)
+table(rolls)
+counts <- table(rolls)
+counts
+proportions <- counts / length(rolls)
+proportions
+proportions[which.max(counts)]
 
 ```
 
 
-1. Write a *function* to simulate rolling a 6-sided die and returns the result.
 
+1. Write a *function* to simulate rolling a 6-sided die and returns the result.
 ```{r}
+roll_die <- function(){sample(1:6, size = 1)}
+roll_die()
 
 ```
 
@@ -125,7 +142,8 @@ x[is.na(x)] <- mean_val
 1. Write a function to simulate rolling 2 6-sided dice that returns the sum of the rolls. 
 
 ```{r}
-
+roll_two_dice <- function(){sum(sample(1:6, size = 2, replace = TRUE))}
+roll_two_dice()
 
 ```
 
@@ -135,6 +153,28 @@ x[is.na(x)] <- mean_val
 
 ```{r}
 # Your one-roll function goes here
+  roll_winner <- function(name1, name2){
+    roll1 <- sample(1:6, 1)
+    roll2 <- sample(1:6, 1)
+    if (roll1 > roll2){
+      return(name1)
+    } else if (roll2 > roll1) {
+      return(name2)
+    } else {
+      # The first tie thus reroll once
+      roll1
+      roll2
+      if (roll1 > roll2){
+        return(name1)
+      } else if (roll2 > roll1){
+        return(name2)
+      } else{
+        return("draw")
+      }
+    }
+  }
+r
+
 
 ```
 
