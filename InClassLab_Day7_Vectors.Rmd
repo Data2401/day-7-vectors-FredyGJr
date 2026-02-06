@@ -173,8 +173,8 @@ roll_two_dice()
       }
     }
   }
-r
 
+roll_winner("Bob", "Mike")
 
 ```
 
@@ -193,7 +193,37 @@ Process:
      * number of ties (sum(ties))
 
 ```{r}
-
+roll_winner_15 <- function(player1, player2){
+  # the simulated roll for the players 15 time
+  p1 <- sample(1:6, size = 15, replace = TRUE)
+  p2 <- sample(1:6, size = 15, replace = TRUE)
+    
+  # logic vectors
+  p1_wins <- p1 > p2
+  p2_wins <- p2 > p1
+  ties <- p1 == p2
+  
+  #counts
+  p1_count <- sum(p1_wins)
+  p2_count <- sum(p2_wins)
+  tie_count <- sum(ties)
+  
+  #report the counts
+  print(paste(player1, "wins:", p1_count))
+  print(paste(player2, "wins:", p2_count))
+  print(paste("ties", tie_count))
+  
+  #deciding the winner
+  if (p1_count > p2_count){
+    player1
+  }else if (p2_count > p1_count){
+    player2
+  }else {
+    "draw"
+  }
+  
+}
+roll_winner_15("Bob", "Daniel")
 
 ```
 
@@ -202,5 +232,52 @@ Process:
 
 ```{r}
 # Your "cheating" function goes here
+roll_winner_15_weighted <- function(player1, player2){
+  #player 1 will have a weighted dice
+  p1 <- sample(1:6, size = 15, replace = TRUE,
+               prob = c(0.01, 0.05, 0.10, 0.15, 0.20, 0.49))
+  #fair die for player 2
+  p2 <- sample(1:6, size = 15, replace = TRUE)
+  
+  # logic vectors
+  p1_wins <- p1 > p2
+  p2_wins <- p2 > p1
+  ties <- p1 == p2
+  
+  #counts
+  p1_count <- sum(p1_wins)
+  p2_count <- sum(p2_wins)
+  tie_count <- sum(ties)
+  
+  #report the counts
+  print(paste(player1, "wins:", p1_count))
+  print(paste(player2, "wins:", p2_count))
+  print(paste("ties", tie_count))
+  
+  #deciding the winner
+  if (p1_count > p2_count){
+    player1
+  }else if (p2_count > p1_count){
+    player2
+  }else {
+    "draw"
+  }
+  
+}
+roll_winner_15_weighted("Bob", "Daniel")
+roll_winner_15_weighted("Bob", "Daniel")
+roll_winner_15_weighted("Bob", "Daniel")
+roll_winner_15_weighted("Bob", "Daniel")
+roll_winner_15_weighted("Bob", "Daniel")
+roll_winner_15_weighted("Bob", "Daniel")
+roll_winner_15_weighted("Bob", "Daniel")
+roll_winner_15_weighted("Bob", "Daniel")
+roll_winner_15_weighted("Bob", "Daniel")
+roll_winner_15_weighted("Bob", "Daniel")
+roll_winner_15_weighted("Bob", "Daniel")
+roll_winner_15_weighted("Bob", "Daniel")
+# Bob/player 1 always wins overall and out of 15 matches the lowest amount of wins he would get would be 8 and most of the time he at least won 10 times for each 15 rolls.
+  
+
 ```
 
